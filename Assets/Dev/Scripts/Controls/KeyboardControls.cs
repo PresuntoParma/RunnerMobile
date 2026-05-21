@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class KeyboardControls : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class KeyboardControls : MonoBehaviour
     [SerializeField] private float gasDepleteRate;
     [SerializeField] private float baseGas = 100f;
     [SerializeField] private float currentGas;
+    [SerializeField] private string tagToCheckNewTile;
+
+    [SerializeField] private TilesManager tilesManager;
     
     private float currentSpeed;
     private float dir;
@@ -46,9 +50,16 @@ public class KeyboardControls : MonoBehaviour
 
     private void Update()
     {
+        if (currentGas <= 0)
+        {
+            GameOver();
+            return;
+        }
+
         ChangeLane();
         LoseSpeed();
         GasDeplete();
+            
 
         print(currentSpeed);
     }
@@ -121,6 +132,12 @@ public class KeyboardControls : MonoBehaviour
             print("Bateu");
             StartCoroutine(Imune());
         }
+
+        if (other.gameObject.CompareTag(tagToCheckNewTile))
+        {
+            print("criar tile");
+            tilesManager.CreateTile(other.GetComponent<BaseTile>().endTile.position);
+        }
     }
 
     private IEnumerator Imune()
@@ -140,5 +157,21 @@ public class KeyboardControls : MonoBehaviour
     public float CurrentGas()
     {
         return currentGas;
+    }
+
+    private void GameOver()
+    {
+        currentSpeed -= Time.deltaTime * 10;
+
+        if (currentSpeed < 0)
+        {
+            currentSpeed = 0;
+            Invoke("Restart", 3f);
+        }
+    }
+
+    private void Restart()
+    {
+        SceneManager.LoadScene("SampleScene");
     }
 }
