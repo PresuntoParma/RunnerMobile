@@ -20,6 +20,7 @@ public class KeyboardControls : MonoBehaviour
     [SerializeField] private float baseGas = 100f;
     [SerializeField] private float currentGas;
     [SerializeField] private string tagToCheckNewTile;
+    [SerializeField] private MeshRenderer model;
 
     [SerializeField] private TilesManager tilesManager;
     
@@ -143,7 +144,13 @@ public class KeyboardControls : MonoBehaviour
     private IEnumerator Imune()
     {
         isImune = true;
-        yield return new WaitForSeconds(1f);
+        for (int i = 0; i < 6; i++)
+        {
+            model.enabled = false;
+            yield return new WaitForSeconds(0.25f);
+            model.enabled = true;
+            yield return new WaitForSeconds(0.25f);
+        }
         isImune = false;
     }
 
@@ -157,6 +164,13 @@ public class KeyboardControls : MonoBehaviour
     public float CurrentGas()
     {
         return currentGas;
+    }
+
+    public void GetGas()
+    {
+        currentGas += 30;
+        if (currentGas > baseGas)
+            currentGas = baseGas;
     }
 
     private void GameOver()
