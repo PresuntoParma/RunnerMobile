@@ -48,6 +48,7 @@ public class KeyboardControls : MonoBehaviour
     {
         ChangeLane();
         LoseSpeed();
+        GasDeplete();
 
         print(currentSpeed);
     }
@@ -131,7 +132,9 @@ public class KeyboardControls : MonoBehaviour
 
     private void GasDeplete()
     {
-        
+        currentGas -= (Time.deltaTime/100) * gasDepleteRate;
+        if (currentGas < 0)
+            currentGas = 0;
     }
 
     public float CurrentGas()
