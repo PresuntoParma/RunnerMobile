@@ -10,8 +10,15 @@ public class KeyboardControls : MonoBehaviour
     [SerializeField] private float moveTime = 0.2f;
     [SerializeField] private float startSpeed = 5f;
     [SerializeField] private float speedLimit;
-    [Tooltip("The modifier of how fast player loses speed, base is 100%")]
+    [SerializeField] private float hardSpeedLimit;
+    [Tooltip("The modifier of how fast player loses speed when above limit, base is 100%")]
     [SerializeField] private float loseSpeedRatio;
+    [SerializeField] private string tagToCheckObstacle;
+    [SerializeField] private bool isImune = false;
+    [SerializeField] private float gasDepleteRate;
+    [SerializeField] private float baseGas = 100f;
+    [SerializeField] private float currentGas;
+    
     private float currentSpeed;
     private float dir;
 
@@ -34,12 +41,15 @@ public class KeyboardControls : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         currentSpeed = startSpeed;
+        currentGas = baseGas;
     }
 
     private void Update()
     {
         ChangeLane();
         LoseSpeed();
+
+        print(currentSpeed);
     }
 
     private void FixedUpdate()
@@ -76,19 +86,56 @@ public class KeyboardControls : MonoBehaviour
     private void Accelerate()
     {
         rb.linearVelocity = Vector3.forward * currentSpeed;
+        if(currentSpeed < speedLimit)
+            currentSpeed += Time.deltaTime;
     }
 
     private void LoseSpeed()
     {
-        if (currentSpeed > startSpeed)
+        if (currentSpeed > hardSpeedLimit)
+            currentSpeed = hardSpeedLimit;
+
+        if (currentSpeed > speedLimit)
             currentSpeed -= (Time.deltaTime/200) * loseSpeedRatio;
 
         if (currentSpeed < startSpeed)
             currentSpeed = startSpeed;
     }
 
+    public void SpeedDown(float mod = 0)
+    {
+        currentSpeed -= (currentSpeed * mod);
+    }
+
     public void SpeedUp(float mod = 0)
     {
         currentSpeed += (startSpeed * mod);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag(tagToCheckObstacle) && isImune == false)
+        {
+            SpeedDown(0.30f);
+            print("Bateu");
+            StartCoroutine(Imune());
+        }
+    }
+
+    private IEnumerator Imune()
+    {
+        isImune = true;
+        yield return new WaitForSeconds(1f);
+        isImune = false;
+    }
+
+    private void GasDeplete()
+    {
+        
+    }
+
+    public float CurrentGas()
+    {
+        return currentGas;
     }
 }
