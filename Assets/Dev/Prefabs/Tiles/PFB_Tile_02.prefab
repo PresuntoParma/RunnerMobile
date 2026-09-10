@@ -72,7 +72,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 41.45, y: 16.8, z: 1}
-  m_Center: {x: 0, y: 0, z: 49.77}
+  m_Center: {x: 0, y: 0, z: 200}
 --- !u!1 &3441047711956674648
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,7 +561,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9067051143323166547, guid: de34aec631657c846bb60bdc7df1ab95, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.109858
+      value: 13.700001
       objectReference: {fileID: 0}
     - target: {fileID: 9067051143323166547, guid: de34aec631657c846bb60bdc7df1ab95, type: 3}
       propertyPath: m_LocalRotation.w
@@ -623,7 +623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8665537056637687829, guid: 8a55384b3f312184ea4fd52de7d3877b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 28.26
+      value: 31.4
       objectReference: {fileID: 0}
     - target: {fileID: 8665537056637687829, guid: 8a55384b3f312184ea4fd52de7d3877b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -685,7 +685,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9067051143323166547, guid: de34aec631657c846bb60bdc7df1ab95, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.109858
+      value: 13.7
       objectReference: {fileID: 0}
     - target: {fileID: 9067051143323166547, guid: de34aec631657c846bb60bdc7df1ab95, type: 3}
       propertyPath: m_LocalRotation.w

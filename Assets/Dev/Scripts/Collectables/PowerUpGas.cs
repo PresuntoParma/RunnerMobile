@@ -6,6 +6,6 @@ public class PowerUpGas : PowerUpBase
     {
         base.Collect();
 
-        player.GetComponent<KeyboardControls>().GetGas();
+        player.GetComponent<KeyboardControls>().GetGas(30);
     }
 }

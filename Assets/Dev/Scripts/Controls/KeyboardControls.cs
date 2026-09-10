@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class KeyboardControls : MonoBehaviour
 {
     [SerializeField] private InputActionReference changeLaneAction;
-
     [SerializeField] private float moveTime = 0.2f;
     [SerializeField] private float startSpeed = 5f;
     [SerializeField] private float speedLimit;
@@ -21,14 +20,18 @@ public class KeyboardControls : MonoBehaviour
     [SerializeField] private float currentGas;
     [SerializeField] private string tagToCheckNewTile;
     [SerializeField] private MeshRenderer model;
-
     [SerializeField] private TilesManager tilesManager;
+
+    [Header("Game Over")]
+    [SerializeField] private GameObject gameOverPanel;
     
     private float currentSpeed;
     private float dir;
+    private float laneWidth = 10f;
 
     private bool isMoving;
-    private float laneWidth = 10f;
+    private bool revivedOnce;
+
     private Rigidbody rb;
 
     private void OnEnable()
@@ -47,6 +50,7 @@ public class KeyboardControls : MonoBehaviour
 
         currentSpeed = startSpeed;
         currentGas = baseGas;
+        revivedOnce = false;
     }
 
     private void Update()
@@ -137,7 +141,7 @@ public class KeyboardControls : MonoBehaviour
         if (other.gameObject.CompareTag(tagToCheckNewTile))
         {
             print("criar tile");
-            tilesManager.CreateTile(other.GetComponent<BaseTile>().endTile.position);
+            tilesManager.CreateTile();
         }
     }
 
@@ -166,26 +170,41 @@ public class KeyboardControls : MonoBehaviour
         return currentGas;
     }
 
-    public void GetGas()
+    public void GetGas(int ammount)
     {
-        currentGas += 30;
+        currentGas += ammount;
         if (currentGas > baseGas)
             currentGas = baseGas;
     }
 
     private void GameOver()
     {
-        currentSpeed -= Time.deltaTime * 10;
+        currentSpeed -= Time.deltaTime * 17f;
 
         if (currentSpeed < 0)
         {
             currentSpeed = 0;
-            Invoke("Restart", 3f);
+            if (revivedOnce == false)
+            {
+                gameOverPanel.SetActive(true);
+            }
+            else
+            {
+                Restart();
+            }
         }
     }
 
-    private void Restart()
+    public void Restart()
     {
         SceneManager.LoadScene("SampleScene");
+    }
+
+    public void GasImpulse()
+    {
+        //Fazer o coiso pra spawnar ad e checar se viu
+        GetGas(65);
+        StartCoroutine(Imune());
+        revivedOnce = true;
     }
 }
