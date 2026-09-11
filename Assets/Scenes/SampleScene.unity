@@ -2084,6 +2084,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   player: {fileID: 314462851}
+  gameOverPanel: {fileID: 991824387}
 --- !u!4 &2109024274
 Transform:
   m_ObjectHideFlags: 0
