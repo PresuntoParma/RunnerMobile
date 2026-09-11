@@ -11,10 +11,13 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener, IU
     private string gameId; // ID do jogo usado na plataforma atual
     private string interstitialAdUnitId = "Interstitial_Android"; // ID do anúncio intersticial
     private string rewardedAdUnitId = "Rewarded_Android"; // ID do anúncio recompensado
-  
- // Chamado automaticamente quando o script é carregado
- void Awake()
+
+    public static AdsInitializer Instance;
+
+    // Chamado automaticamente quando o script é carregado
+    void Awake()
     {
+        Instance = this;
         InitializeAds(); // Inicializa o sistema de anúncios
     }
     // Inicializa o Unity Ads

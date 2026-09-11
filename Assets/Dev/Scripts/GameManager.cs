@@ -2,15 +2,34 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static GameManager Instance;
+
+    [SerializeField] private KeyboardControls player;
+
+    private void Awake()
     {
-        
+        Instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ShowRewardedAd()
     {
-        
+        PauseGame();
+        AdsInitializer.Instance.ShowRewardedAd();
+    }
+
+    public void GiveReward()
+    {
+        player.GasImpulse();
+        ResumeGame();
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
     }
 }
