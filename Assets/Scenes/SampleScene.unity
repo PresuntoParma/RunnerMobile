@@ -390,8 +390,8 @@ MonoBehaviour:
   changeLaneAction: {fileID: -4496104199121097437, guid: 61c82d49059786c4bb8d19cd7a0cfe4e, type: 3}
   moveTime: 0.2
   startSpeed: 10
-  speedLimit: 50
-  hardSpeedLimit: 75
+  speedLimit: 75
+  hardSpeedLimit: 100
   loseSpeedRatio: 200
   tagToCheckObstacle: Obstacle
   isImune: 0
