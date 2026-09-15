@@ -87,6 +87,7 @@ MonoBehaviour:
     - GridLayoutGroup Icon
     - 
     - Image Icon
+    - Text Icon
     enabled: 1
   - builtinIcons: []
     customIcons: []
