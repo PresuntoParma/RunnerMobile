@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using DG.Tweening;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using MoreMountains.Feedbacks;
 
 public class KeyboardControls : MonoBehaviour
 {
@@ -24,6 +25,9 @@ public class KeyboardControls : MonoBehaviour
 
     [Header("Game Over")]
     [SerializeField] private GameObject gameOverPanel;
+
+    [Header("Feel")]
+    [SerializeField] private MMSpringRotation springRotation;
     
     private float currentSpeed;
     private float dir;
@@ -31,6 +35,8 @@ public class KeyboardControls : MonoBehaviour
 
     private bool isMoving;
     private bool revivedOnce;
+
+    private Vector3 startRotation;
 
     private Rigidbody rb;
 
@@ -51,6 +57,7 @@ public class KeyboardControls : MonoBehaviour
         currentSpeed = startSpeed;
         currentGas = baseGas;
         revivedOnce = false;
+        startRotation = model.gameObject.transform.eulerAngles;
     }
 
     private void Update()
@@ -89,6 +96,7 @@ public class KeyboardControls : MonoBehaviour
 
             
             moveTween = transform.DOMoveX(laneWidth * dir, moveTime).SetRelative();
+            springRotation.MoveToAdditive(new Vector3(0f, 10f * dir, 0f));
             StartCoroutine(IsMoving());
         }
     }
@@ -97,6 +105,7 @@ public class KeyboardControls : MonoBehaviour
     {
         isMoving = true;
         yield return new WaitForSeconds(moveTime);
+        springRotation.MoveTo(startRotation);
         isMoving = false;
     }
 

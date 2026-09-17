@@ -11,9 +11,13 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        
+
         Instance = this;
     }
 
+
+    #region ADVERTISEMENT
     public void ShowRewardedAd()
     {
         AdsInitializer.Instance.ShowRewardedAd();
@@ -41,4 +45,5 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
     }
+    #endregion
 }
