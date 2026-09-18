@@ -1,23 +1,22 @@
+using System;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class AdsManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    
 
-    [SerializeField] private KeyboardControls player;
+    public Action PlayerGasImpulse;
 
-    // ADICIONADO: painel de Game Over
-    [SerializeField] private GameObject gameOverPanel;
+    public static AdsManager Instance;
 
     private void Awake()
     {
-        
+        if (Instance != null && Instance != this)
+            Destroy(this.gameObject);
 
         Instance = this;
     }
 
-
-    #region ADVERTISEMENT
     public void ShowRewardedAd()
     {
         AdsInitializer.Instance.ShowRewardedAd();
@@ -25,11 +24,7 @@ public class GameManager : MonoBehaviour
 
     public void GiveReward()
     {
-        player.GasImpulse();
-
-        // ADICIONADO: fecha a tela de Game Over
-        gameOverPanel.SetActive(false);
-
+        PlayerGasImpulse();
         // ADICIONADO: retoma o jogo
         ResumeGame();
     }
@@ -45,5 +40,4 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
     }
-    #endregion
 }

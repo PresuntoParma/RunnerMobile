@@ -58,6 +58,8 @@ public class KeyboardControls : MonoBehaviour
         currentGas = baseGas;
         revivedOnce = false;
         startRotation = model.gameObject.transform.eulerAngles;
+
+        StartCoroutine(AddScore());
     }
 
     private void Update()
@@ -71,9 +73,6 @@ public class KeyboardControls : MonoBehaviour
         ChangeLane();
         LoseSpeed();
         GasDeplete();
-            
-
-        print(currentSpeed);
     }
 
     private void FixedUpdate()
@@ -215,5 +214,15 @@ public class KeyboardControls : MonoBehaviour
         GetGas(65);
         StartCoroutine(Imune());
         revivedOnce = true;
+    }
+
+    private IEnumerator AddScore()
+    {
+        float i = currentSpeed;
+        i *= 0.1f;
+        print(GameManager.Instance.GetScore());
+        GameManager.Instance.ChangeScore(i);
+        yield return new WaitForSeconds(0.1f);
+        StartCoroutine(AddScore());
     }
 }

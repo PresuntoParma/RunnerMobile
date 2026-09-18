@@ -60,7 +60,7 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener, IU
     public void ShowRewardedAd()
     {
         // ADICIONADO: pausa o jogo antes de abrir o anúncio
-        GameManager.Instance.PauseGame();
+        AdsManager.Instance.PauseGame();
 
         Advertisement.Show(rewardedAdUnitId, this);
     }
@@ -101,7 +101,7 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener, IU
         // ADICIONADO: se o anúncio falhar, o jogo volta a rodar
         if (adUnitId.Equals(rewardedAdUnitId))
         {
-            GameManager.Instance.ResumeGame();
+            AdsManager.Instance.ResumeGame();
         }
     }
 
@@ -123,12 +123,12 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener, IU
                 Debug.Log("Rewarded ad completed! Give reward to player.");
 
                 // ADICIONADO: dá a recompensa
-                GameManager.Instance.GiveReward();
+                AdsManager.Instance.GiveReward();
             }
             else
             {
                 // ADICIONADO: se fechou antes de terminar, apenas retoma o jogo
-                GameManager.Instance.ResumeGame();
+                AdsManager.Instance.ResumeGame();
             }
         }
     }
