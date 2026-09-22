@@ -87,7 +87,6 @@ public class KeyboardControls : MonoBehaviour
     {
         Tween moveTween;
         dir = changeLaneAction.action.ReadValue<float>();
-        print(dir);
 
 
         if (dir != 0 && !isMoving)
@@ -145,13 +144,11 @@ public class KeyboardControls : MonoBehaviour
         if (other.gameObject.CompareTag(tagToCheckObstacle) && isImune == false)
         {
             SpeedDown(0.30f);
-            print("Bateu");
             StartCoroutine(Imune());
         }
 
         if (other.gameObject.CompareTag(tagToCheckNewTile))
         {
-            print("criar tile");
             tilesManager.CreateTile();
         }
     }

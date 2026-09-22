@@ -8,5 +8,6 @@ public class SetHighScoreText : MonoBehaviour
     private void Start()
     {
         textHighScore.text = GameManager.Instance.GetHighScore().ToString();
+        print(GameManager.Instance.GetHighScore().ToString());
     }
 }

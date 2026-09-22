@@ -7,6 +7,5 @@
   <Project Path="VHierarchy.csproj" />
   <Project Path="Assembly-CSharp-firstpass.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
-  <Project Path="Lofelt.NiceVibrations.Demo.csproj" />
   <Project Path="Lofelt.NiceVibrations.Editor.csproj" />
 </Solution>

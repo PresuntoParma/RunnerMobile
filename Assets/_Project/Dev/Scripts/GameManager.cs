@@ -11,7 +11,10 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         if (Instance != null && Instance != this)
+        {
             Destroy(this.gameObject);
+            return;
+        }
 
         Instance = this;
 
@@ -21,6 +24,8 @@ public class GameManager : MonoBehaviour
     public void ChangeScore(float ammount)
     {
         trueScore += ammount;
+        if (score > highScore)
+            highScore = score;
     }
 
     public void ResetScore()
@@ -38,8 +43,6 @@ public class GameManager : MonoBehaviour
 
     public int GetHighScore()
     {
-        if (score > highScore)
-            highScore = score;
         return highScore;
     }
 }
