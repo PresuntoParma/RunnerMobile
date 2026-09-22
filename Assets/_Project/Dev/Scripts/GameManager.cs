@@ -26,9 +26,10 @@ public class GameManager : MonoBehaviour
     public void ResetScore()
     {
         score = 0;
+        trueScore = 0;
     }
 
-    public float GetScore()
+    public int GetScore()
     {
         score = (int)trueScore;
 
@@ -37,6 +38,8 @@ public class GameManager : MonoBehaviour
 
     public int GetHighScore()
     {
+        if (score > highScore)
+            highScore = score;
         return highScore;
     }
 }

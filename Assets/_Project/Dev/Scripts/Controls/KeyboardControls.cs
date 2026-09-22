@@ -22,6 +22,7 @@ public class KeyboardControls : MonoBehaviour
     [SerializeField] private string tagToCheckNewTile;
     [SerializeField] private MeshRenderer model;
     [SerializeField] private TilesManager tilesManager;
+    [SerializeField] private ScoreControl scoreControl;
 
     [Header("Game Over")]
     [SerializeField] private GameObject gameOverPanel;
@@ -58,6 +59,8 @@ public class KeyboardControls : MonoBehaviour
         currentGas = baseGas;
         revivedOnce = false;
         startRotation = model.gameObject.transform.eulerAngles;
+
+        GameManager.Instance.ResetScore();
 
         StartCoroutine(AddScore());
     }
@@ -198,14 +201,9 @@ public class KeyboardControls : MonoBehaviour
             }
             else
             {
-                Restart();
+                SceneManager.LoadScene("MenuScene");
             }
         }
-    }
-
-    public void Restart()
-    {
-        SceneManager.LoadScene("SampleScene");
     }
 
     public void GasImpulse()
@@ -220,8 +218,9 @@ public class KeyboardControls : MonoBehaviour
     {
         float i = currentSpeed;
         i *= 0.1f;
-        print(GameManager.Instance.GetScore());
+        //print(GameManager.Instance.GetScore());
         GameManager.Instance.ChangeScore(i);
+        scoreControl.UpdateScoreText(GameManager.Instance.GetScore());
         yield return new WaitForSeconds(0.1f);
         StartCoroutine(AddScore());
     }
