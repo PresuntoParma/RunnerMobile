@@ -1217,7 +1217,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &991824388
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1462,7 +1462,7 @@ GameObject:
   - component: {fileID: 1106610088}
   - component: {fileID: 1106610091}
   m_Layer: 5
-  m_Name: Button (Legacy)
+  m_Name: ButtonNo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
