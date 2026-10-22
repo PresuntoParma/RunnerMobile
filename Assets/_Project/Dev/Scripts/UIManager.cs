@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
     public Text playerScoreValue;
 
     [SerializeField] private Text textStatus;
+    [SerializeField] private GameObject panelRecord;
 
     [SerializeField] private DataManager dataManager;
 
@@ -28,6 +29,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        panelRecord.SetActive(false);
        playerHighScoreValue.text = highScore.ToString();
        playerScoreValue.text = score.ToString();
 
@@ -75,5 +77,14 @@ public class UIManager : MonoBehaviour
     private void Status(string msg)
     {
         textStatus.text = msg;
+    }
+
+   public void ActivatePanel(GameObject panel)
+    {
+        panel.SetActive(true);
+    }
+    public void ClosePanel(GameObject panel)
+    {
+        panel.SetActive(false);
     }
 }
